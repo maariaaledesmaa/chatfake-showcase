@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ChatFake · Live demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0b0d12;color:#eef1f6;min-height:100vh;display:flex;gap:44px;justify-content:center;align-items:center;padding:16px;flex-wrap:wrap}
+button{font:inherit;cursor:pointer;border:0}
+#side{max-width:270px}h1{font-size:30px;letter-spacing:-1px}h1 small{font-size:12px;color:#0a84ff;border:1px solid #0a84ff66;border-radius:99px;padding:2px 9px;vertical-align:middle}
+#side p{color:#8b93a3;margin:10px 0 16px}.seg{display:flex;background:#141821;border-radius:12px;padding:3px;margin-bottom:10px}
+.seg button{flex:1;padding:9px;border-radius:9px;background:none;color:#8b93a3}.seg .on{background:#0a84ff;color:#fff}
+#rp{width:100%;padding:11px;border-radius:12px;background:#141821;color:#eef1f6;border:1px solid #ffffff1a;margin-bottom:14px}#rp:disabled{opacity:.4;cursor:default}
+#left{color:#8b93a3;font-size:14px;margin-bottom:14px}#side a{color:#0a84ff;text-decoration:none}
+#phone{width:min(390px,100%);height:min(790px,90vh);border:10px solid #000;border-radius:52px;overflow:hidden;position:relative;background:#000;box-shadow:0 0 0 2px #3a3d45,0 30px 70px #0009}
+#screen{height:100%;display:flex;flex-direction:column;--bg:#fff;--fg:#000;--hd:#f6f6f6;--ln:#d1d1d6;--rc:#e9e9eb;--sub:#8e8e93;background:var(--bg);color:var(--fg)}
+#screen.wa{--hd:#fff;--rc:#fff;--cb:#efeae2;--ln:#e9edef}
+#sb{height:46px;flex:none;display:flex;justify-content:space-between;align-items:flex-end;padding:0 32px 6px 36px;font-weight:600;background:var(--hd);position:relative}
+#sb::before{content:'';position:absolute;top:10px;left:50%;transform:translateX(-50%);width:104px;height:30px;background:#000;border-radius:20px}
+#app{flex:1;display:flex;flex-direction:column;min-height:0}
+.hd{flex:none;background:var(--hd);padding:6px 16px}.ht{font-size:32px;font-weight:700}.wa .ht{font-size:26px;color:#1fa855;letter-spacing:-.5px}
+.rows{flex:1;overflow:auto}.row{display:flex;gap:12px;padding:10px 16px;align-items:center;cursor:pointer}.ios .row,#screen:not(.wa) .row{border-bottom:.5px solid var(--ln)}
+.row div{flex:1;min-width:0}.row b{display:block}.row span{display:block;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row small{color:var(--sub);font-size:13px}
+.av{background:linear-gradient(#a8adb8,#868b97);color:#fff;border-radius:50%;width:48px;height:48px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:500;font-size:20px;flex:none}
+.cv{display:flex;align-items:center;gap:10px;border-bottom:.5px solid var(--ln)}.cv .av{width:36px;height:36px;font-size:15px}.cv b{flex:1}
+#screen:not(.wa) .cv{flex-direction:column;gap:2px;padding:2px 10px 6px;position:relative;font-size:11px}#screen:not(.wa) .bk{position:absolute;left:8px;top:2px}
+.bk{background:none;font-size:32px;line-height:1;color:#0a84ff}.wa .bk{color:var(--fg)}
+#msgs{flex:1;overflow-y:auto;overflow-x:hidden;padding:8px 18px 12px;display:flex;flex-direction:column;background:var(--bg)}.wa #msgs{background:var(--cb);padding:8px 12px}
+.m{position:relative;margin-top:2px;max-width:76%;line-height:1.3}.m.f{margin-top:8px}.n2{font-size:11px;color:var(--sub);margin:8px 0 0 14px}.sn{display:block;font-size:13px;color:#a33}
+#screen:not(.wa) .m{padding:7px 13px;border-radius:19px;font-size:17px}#screen:not(.wa) time{display:none}
+#screen:not(.wa) .s{align-self:flex-end;background:#0a84ff;color:#fff}#screen:not(.wa) .r{align-self:flex-start;background:var(--rc)}
+#screen:not(.wa) .m.l::before,#screen:not(.wa) .m.l::after{content:'';position:absolute;bottom:0;height:18px}
+#screen:not(.wa) .s.l::before{right:-7px;width:20px;background:#0a84ff;border-bottom-left-radius:16px 14px}#screen:not(.wa) .s.l::after{right:-26px;width:26px;background:var(--bg);border-bottom-left-radius:10px}
+#screen:not(.wa) .r.l::before{left:-7px;width:20px;background:var(--rc);border-bottom-right-radius:16px 14px}#screen:not(.wa) .r.l::after{left:-26px;width:26px;background:var(--bg);border-bottom-right-radius:10px}
+.wa .m{padding:5px 8px 5px 9px;border-radius:8px;font-size:15.5px;box-shadow:0 1px .5px #0002}.wa .s{align-self:flex-end;background:#d9fdd3}.wa .r{align-self:flex-start;background:#fff}
+.wa .m.f::before{content:'';position:absolute;top:0;border-bottom:10px solid transparent}.wa .s.f::before{right:-7px;border-left:8px solid #d9fdd3}.wa .r.f::before{left:-7px;border-right:8px solid #fff}
+.wa .s.f{border-top-right-radius:0}.wa .r.f{border-top-left-radius:0}.wa time{float:right;margin:7px 0 -2px 10px;font-size:11px;color:var(--sub)}.wa time i{color:#53bdeb;font-style:normal}
+.cp{flex:none;padding:6px 12px 24px;background:var(--bg)}.wa .cp{background:var(--cb)}
+.pill{display:flex;align-items:center;padding:4px 4px 4px 14px;gap:6px}#screen:not(.wa) .pill{border:1px solid var(--ln);border-radius:20px}.wa .pill{background:#fff;border-radius:24px;padding:5px 5px 5px 14px}
+.pill input{flex:1;border:0;outline:0;background:none;font:inherit;font-size:16px;min-width:0;color:var(--fg)}
+.sd{color:#fff;border-radius:50%;width:30px;height:30px;font-weight:700}#screen:not(.wa) .sd{background:#0a84ff}.wa .sd{background:#00a884;width:40px;height:40px}
+#lock{position:absolute;inset:0;background:#000b;backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;text-align:center;padding:30px;z-index:9;color:#fff}
+#lock[hidden]{display:none}#lock .ic{font-size:44px}#lock h2{margin:8px 0}#lock p{color:#c7cbd4;margin-bottom:16px}
+#lock a{display:inline-block;background:linear-gradient(45deg,#f9a03f,#e1306c,#8a3ab9);color:#fff;text-decoration:none;font-weight:600;padding:12px 20px;border-radius:12px}
+</style></head><body>
+<div id="side"><h1>ChatFake <small>live demo</small></h1>
+<p>Fictional data. This demo is limited to a few actions: open chats, send messages, simulate replies and switch the app style.</p>
+<div class="seg"><button data-v="ios">iMessage</button><button data-v="wa">WhatsApp</button></div>
+<button id="rp" data-a="rp">Simulate a reply</button><div id="left"></div><a href="./">← Back to showcase</a></div>
+<div id="phone"><div id="screen"><div id="sb"><span>9:41</span><span>100%</span></div><div id="app"></div></div>
+<div id="lock" hidden><div><div class="ic">🔒</div><h2>Demo limit reached</h2><p>For more information, please contact the creator.</p><a href="https://instagram.com/maariaaledesmaa" target="_blank" rel="noopener">Instagram: @maariaaledesmaa</a></div></div></div>
+<script>
+const LIM=12,$=s=>document.querySelector(s);let n=0,v='ios',cur=null;
+const D=[
+{n:'Mia Carter',m:[['r','Are you still coming tonight?'],['s','Yes! Bringing snacks 🍿'],['r',"You're the best ❤️"]],q:['See you at 8!',"Don't forget the playlist 🎶"]},
+{n:'Noah Bennett',m:[['r','Did you see the game last night?'],['s','Missed it, who won?']],q:['We did! Final minute 🔥','Next time you are coming with me.']},
+{n:'Design Team',g:1,w:['Lily','Jake'],m:[['r','Mockups are ready 🎨','Lily'],['r','Looks great!','Jake'],['s','Shipping them today 🚀']],q:['Nice work, team!','Coffee after this?']}];
+const last=c=>c.m[c.m.length-1];
+function list(){return `<div class=hd><b class=ht>${v=='ios'?'Messages':'WhatsApp'}</b></div><div class=rows>${D.map((c,i)=>{const l=last(c);return `<div class=row data-a=o data-i=${i}><i class=av>${c.n[0]}</i><div><b>${c.n}</b><span>${l[2]?l[2]+': ':''}${l[1]}</span></div><small>9:41</small></div>`}).join('')}</div>`}
+function chat(){const c=D[cur],io=v=='ios';return `<div class="hd cv"><button class=bk data-a=b>‹</button><i class=av>${c.n[0]}</i><b>${c.n}</b></div><div id=msgs>${c.m.map((m,k)=>{const p=c.m[k-1],x=c.m[k+1],f=!p||p[0]!=m[0]||p[2]!=m[2],l=!x||x[0]!=m[0]||x[2]!=m[2],nm=c.g&&m[0]=='r'&&f;return `${nm&&io?`<div class=n2>${m[2]}</div>`:''}<div class="m ${m[0]}${f?' f':''}${l?' l':''}">${nm&&!io?`<b class=sn>${m[2]}</b>`:''}${m[1]}<time>9:41${m[0]=='s'?' <i>✓✓</i>':''}</time></div>`}).join('')}</div><div class=cp><div class=pill><input id=inp placeholder="${io?'iMessage':'Message'}" autocomplete=off><button class=sd data-a=s>${io?'↑':'➤'}</button></div></div>`}
+function render(){$('#screen').className=v=='wa'?'wa':'';document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('on',b.dataset.v==v));
+$('#rp').disabled=cur===null||n>=LIM;$('#left').textContent=n>=LIM?'Demo finished':`${LIM-n} actions left`;
+$('#app').innerHTML=cur===null?list():chat();const m=$('#msgs');if(m)m.scrollTop=m.scrollHeight}
+function act(f){if(n>=LIM)return;if(f()===false)return;n++;render();if(n>=LIM)setTimeout(()=>$('#lock').hidden=false,900)}
+function send(){const i=$('#inp'),t=i&&i.value.trim();if(!t)return false;D[cur].m.push(['s',t])}
+function reply(){const c=D[cur];c.k=(c.k||0)+1;c.m.push(['r',c.q[c.k%c.q.length],c.g?c.w[c.k%2]:undefined])}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a],[data-v]');if(!t)return;const a=t.dataset.a;
+if(t.dataset.v)act(()=>{if(v==t.dataset.v)return false;v=t.dataset.v});
+else if(a=='o')act(()=>{cur=+t.dataset.i});else if(a=='b')act(()=>{cur=null});
+else if(a=='s')act(send);else if(a=='rp')act(()=>{if(cur===null)return false;reply()})});
+document.addEventListener('keydown',e=>{if(e.key=='Enter'&&e.target.id=='inp')act(send);if(e.key=='Enter'&&e.target.id=='inp')setTimeout(()=>$('#inp')?.focus())});
+render();
+</script></body></html>

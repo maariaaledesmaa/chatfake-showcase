@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420"><defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#0a84ff"/><stop offset="1" stop-color="#25d366"/></linearGradient><radialGradient id="a" cx=".85" cy="0" r=".6"><stop offset="0" stop-color="#0a84ff" stop-opacity=".35"/><stop offset="1" stop-color="#0a84ff" stop-opacity="0"/></radialGradient></defs>
+<rect width="1200" height="420" fill="#0b0d12"/><rect width="1200" height="420" fill="url(#a)"/>
+<text x="70" y="170" font-family="Segoe UI,Arial,sans-serif" font-size="68" font-weight="700" fill="#eef1f6">ChatFake</text>
+<rect x="72" y="188" width="150" height="6" rx="3" fill="url(#g)"/>
+<text x="70" y="250" font-family="Segoe UI,Arial,sans-serif" font-size="26" fill="#8b93a3">iMessage &amp; WhatsApp chat simulator</text>
+<text x="70" y="290" font-family="Segoe UI,Arial,sans-serif" font-size="26" fill="#8b93a3">Multi-phone · linked chats · clean screenshots</text>
+<g><rect x="720" y="40" width="200" height="400" rx="34" fill="#fff" stroke="#000" stroke-width="7"/><rect x="722" y="42" width="196" height="64" rx="30" fill="#f6f6f6"/>
+<rect x="740" y="130" width="120" height="34" rx="17" fill="#e9e9eb"/><rect x="800" y="176" width="100" height="34" rx="17" fill="#0a84ff"/><rect x="740" y="222" width="140" height="34" rx="17" fill="#e9e9eb"/><rect x="780" y="268" width="120" height="34" rx="17" fill="#0a84ff"/></g>
+<g><rect x="950" y="70" width="200" height="400" rx="34" fill="#efeae2" stroke="#000" stroke-width="7"/><rect x="952" y="72" width="196" height="60" rx="30" fill="#fff"/>
+<rect x="970" y="160" width="110" height="34" rx="8" fill="#fff"/><rect x="1030" y="206" width="100" height="34" rx="8" fill="#d9fdd3"/><rect x="970" y="252" width="130" height="34" rx="8" fill="#fff"/><rect x="1010" y="298" width="120" height="34" rx="8" fill="#d9fdd3"/></g></svg>
