@@ -32,7 +32,7 @@ ChatFake is a local web app to create believable fake conversations. Each profil
 
 ## 🧪 About the live demo
 
-[`demo.html`](demo.html) is a **small, limited version** with fictional data: open chats, send messages, simulate replies and switch between the iMessage and WhatsApp styles. After a few actions it locks itself.
+[`demo.html`](demo.html) reproduces the phone interface of the app with **fictional data**: two linked phones (Emma and Liam), lock screen with notifications, chat list, group chat, and the iMessage / WhatsApp styles. It is limited to **5 clicks**, after which it locks itself. Creating, editing, screenshots and import/export are not available in the demo.
 
 ## 🛠 Tech
 
